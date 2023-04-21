@@ -1,0 +1,13 @@
+.veille .content {
+    display: flex;
+    justify-content: center;
+}
+
+ .content {
+    font-size: large;
+    border-radius: 10px;
+    border-style: double;
+}
+.row{
+    color: white;
+}
