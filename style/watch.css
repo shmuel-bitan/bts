@@ -23,5 +23,7 @@ button {
     margin: 4px 2px;
     cursor: pointer;
     border-radius: 15px;
-    margin-left: 40%;
   }
+.alignement{
+    margin-left:40%;
+}
