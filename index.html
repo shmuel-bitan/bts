@@ -1,9 +1,130 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=https://shmuel-bitan.github.io/portfolio/">
-  </head>
-  <body>
-    Redirection to the new portfolio
-  </body>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+
+  <!-- Redirection auto (fallback) -->
+  <meta http-equiv="refresh" content="5; url=https://shmuel-bitan.github.io/portfolio/">
+
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      color: #00ff9f;
+      font-family: "Courier New", monospace;
+      overflow: hidden;
+    }
+
+    .terminal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      white-space: pre-line;
+    }
+
+    .cursor {
+      display: inline-block;
+      width: 10px;
+      background: #00ff9f;
+      margin-left: 5px;
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="terminal" id="text"></div>
+
+<script>
+  // Texte simulé terminal
+  const lines = [
+    "Initializing secure connection...",
+    "Bypassing firewall...",
+    "Access granted ✔",
+    "Redirecting to new portfolio..."
+  ];
+
+  let i = 0;
+  let j = 0;
+  const speed = 40;
+  const textDiv = document.getElementById("text");
+
+  function type() {
+    if (i < lines.length) {
+      if (j < lines[i].length) {
+        textDiv.innerHTML += lines[i].charAt(j);
+        j++;
+        setTimeout(type, speed);
+      } else {
+        textDiv.innerHTML += "\n";
+        i++;
+        j = 0;
+        setTimeout(type, 500);
+      }
+    }
+  }
+
+  type();
+
+  // Redirection JS (plus fluide)
+  setTimeout(() => {
+    window.location.href = "https://ton-nouveau-site.com";
+  }, 4000);
+
+
+  // Effet Matrix pluie de code
+  const canvas = document.getElementById("matrix");
+  const ctx = canvas.getContext("2d");
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+
+  const drops = [];
+
+  for (let x = 0; x < columns; x++) {
+    drops[x] = 1;
+  }
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00ff9f";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = letters.charAt(Math.floor(Math.random() * letters.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975)
+        drops[i] = 0;
+
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 33);
+</script>
+
+</body>
 </html>
